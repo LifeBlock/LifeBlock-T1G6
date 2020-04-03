@@ -38,6 +38,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'upload_interaction',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../uploadInteraction/uploadInteraction.module').then(m => m.UploadInteractionPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/institution/home',
         pathMatch: 'full'
