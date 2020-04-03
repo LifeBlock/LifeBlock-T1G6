@@ -46,3 +46,5 @@ For testing purposes, here are the addresses of the users of this system
 0x204729E93654fefc04E1614Ba634f69e362Cf226 -- Institution 3 Apple
 0xdAC014022A66ED4e617CE19102ee0DC28094147a -- Institution 4 Netflix
 0xac04944599Ca5BcD758AdBf49D338e31f3E139F6 -- Institution 5 Google
+
+Change capital letters to small letters when pasting into hard map
