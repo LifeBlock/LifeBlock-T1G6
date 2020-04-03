@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { ExploreContainerComponentModule } from '../../0_explore-container/explore-container.module';
 import { SearchUserPage } from './searchUser.page';
 
-describe('SearchInstitutionPage', () => {
+describe('SearchUserPage', () => {
   let component: SearchUserPage;
   let fixture: ComponentFixture<SearchUserPage>;
 
