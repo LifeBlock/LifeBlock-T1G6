@@ -35,8 +35,10 @@ npm i @angular-devkit/build-angular@0.803.24 //to avoid an error
 
 ionic serve // do not close
 
+### Install Metamask in browser
+For testing purposes, here are the addresses of the users of this system,
+modify the hard map accordingly in the development.js file
 
-For testing purposes, here are the addresses of the users of this system
 0xEa9764d165461e4e729886A023b2BBd389CDA959 -- Contract Owner
 0xB422d54Cc2b92A2462f035E31d34e11e61ff54a1 -- User 1 Bob 
 0x8B6796841E411e725C16F18894c734FA44Fc0cD5 -- User 2 Peter
