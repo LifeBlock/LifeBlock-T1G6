@@ -4,7 +4,7 @@
 
 Ensure that you have metamask plugin install on your browser.
 
-Go the development.js (BackEnd/development.js) and change the address in accounts[0] to your own address.  You would now the the owner of the contract.
+Go the development.js (BackEnd/development.js) and change the address in accounts[0] to your own address.  You would now be the the owner of the contract.
 
 
 Test case 1: Using BlockLife as an institution
