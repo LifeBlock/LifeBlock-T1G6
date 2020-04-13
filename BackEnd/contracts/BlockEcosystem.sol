@@ -33,7 +33,7 @@ contract BlockEcosystem {
         contractOwner = msg.sender;
         userIdentity[msg.sender] = Identity.owner;
         authorizedList[msg.sender] = true;
-        registeredName[msg.sender] = "Holala";
+        registeredName[msg.sender] = "IS4302";
     }
 
 
@@ -93,13 +93,18 @@ contract BlockEcosystem {
         _;
     }
 
-    modifier isRegisteredUser() {
-        require(userIdentity[msg.sender] == Identity.individual, "Only registered users have access to this function!");
+    modifier isRegisteredIndividual() {
+        require(userIdentity[msg.sender] == Identity.individual, "Only registered individuals have access to this function!");
         _;
     }
 
     modifier isUnregisteredUser() {
         require(userIdentity[msg.sender] == Identity.undefined, "Only unregistered users have access to this function!");
+        _;
+    }
+
+    modifier isUnregisteredUser_(address newAddress) {
+        require(userIdentity[newAddress] == Identity.undefined, "Only unregistered users have access to this function!");
         _;
     }
 
@@ -118,7 +123,8 @@ contract BlockEcosystem {
         registeredName[msg.sender] = individualName;
     }
 
-    function registerInstitution(address newInstitution, bytes memory institutionName) public isAuthorized() {
+    function registerInstitution(address newInstitution, bytes memory institutionName) public 
+    isAuthorized() isUnregisteredUser_(newInstitution) {
         userIdentity[newInstitution] = Identity.institution;
         registeredName[newInstitution] = institutionName;
     }
@@ -147,9 +153,10 @@ contract BlockEcosystem {
         emit InvalidateInteraction(interactionHash);
     }
 
-    function addFeedback(bytes memory feedbackText, uint timestamp, address institution) public  isRegisteredUser() hasPreviousInteraction(institution) {
+    function addFeedback(bytes memory feedbackText, uint timestamp, address institution) public  
+    isRegisteredIndividual() hasPreviousInteraction(institution) {
         uint newId = numberFeedback;
-        numberFeedback = numberFeedback + 1; 
+        numberFeedback = numberFeedback.add(1); 
         Feedback memory newFeedback = Feedback(newId, feedbackText, timestamp, msg.sender, institution, true);
         organizationFeedback[institution].push(newFeedback);
         uint256 institutionIndex = organizationFeedback[institution].length;
@@ -177,8 +184,8 @@ contract BlockEcosystem {
         return uploadedInteraction[msg.sender];
     }
 
-    // For uesrs to retrieve all the feedback they added.
-    function getAddedFeedback() public view isRegisteredUser() returns (Feedback[] memory) {
+    // For users to retrieve all the feedback they added.
+    function getAddedFeedback() public view isRegisteredIndividual() returns (Feedback[] memory) {
         return addedFeedback[msg.sender];
     }
 
@@ -186,7 +193,7 @@ contract BlockEcosystem {
         return individualProfile[individual];
     }
 
-    function getFeedback(address institution) public view returns (Feedback[] memory) {
+    function getFeedback(address institution) public view isRegisteredInstitution(institution) returns (Feedback[] memory) {
         return organizationFeedback[institution];
     }
 
@@ -196,6 +203,10 @@ contract BlockEcosystem {
 
     function getName(address targettedAddress) public view returns (bytes memory) {
         return registeredName[targettedAddress];
+    }
+
+    function getAuthorizedStatus(address targettedAddress) public view returns (bool) {
+        return authorizedList[targettedAddress];
     }   
 
 }
