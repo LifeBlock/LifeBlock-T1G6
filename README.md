@@ -57,3 +57,11 @@ cd FrontEnd && npm install
 npm i @angular-devkit/build-angular@0.803.24 //to avoid an error
 
 ionic serve // do not close
+
+### Instruction on how to run test cases
+
+###### After completing all above instructions (installing dependencies etc), go to the BackEnd folder 
+
+cd BackEnd
+<br>
+truffle test //to run the test cases
